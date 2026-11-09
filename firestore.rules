@@ -1,0 +1,39 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function for validating product fields
+    function isValidProduct(data) {
+      return data.id is string &&
+             data.name is string && data.name.size() > 0 &&
+             data.category is string &&
+             data.price is number && data.price >= 0 &&
+             data.inStock is bool;
+    }
+
+    // Helper function for validating store settings fields
+    function isValidSettings(data) {
+      return data.whatsappNumber is string && data.whatsappNumber.size() > 0;
+    }
+
+    // Products: Public read for all storefront visitors; writes permitted for valid products
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update: if isValidProduct(request.resource.data);
+      allow delete: if true;
+    }
+
+    // Store Settings: Public read; validated writes
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update: if isValidSettings(request.resource.data);
+      allow delete: if false;
+    }
+
+    // Test connection document for connection health-checks
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

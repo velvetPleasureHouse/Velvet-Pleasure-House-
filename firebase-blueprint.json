@@ -1,0 +1,51 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Velvet Pleasure House intimate wellness or pleasure product",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique product ID" },
+        "name": { "type": "string", "description": "Product title" },
+        "category": { "type": "string", "description": "Product category: lingerie, toys, lubricants, intimate-care" },
+        "price": { "type": "number", "description": "Price in Nigerian Naira" },
+        "shortDescription": { "type": "string", "description": "Brief description for card views" },
+        "description": { "type": "string", "description": "Detailed product description and guidance" },
+        "images": { "type": "array", "description": "Array of product image URLs" },
+        "inStock": { "type": "boolean", "description": "Product stock availability status" },
+        "isFeatured": { "type": "boolean", "description": "Whether product appears in featured section on homepage" },
+        "materials": { "type": "string", "description": "Body-safe materials specification" },
+        "safetyAndCare": { "type": "string", "description": "Hygiene and care recommendations" },
+        "badge": { "type": "string", "description": "Optional promotional tag like Bestseller or New" },
+        "isDemonstration": { "type": "boolean", "description": "Flag for demonstration products" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["id", "name", "category", "price", "inStock"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Store configuration and customer support details",
+      "type": "object",
+      "properties": {
+        "whatsappNumber": { "type": "string", "description": "WhatsApp business contact number" },
+        "businessEmail": { "type": "string", "description": "Concierge email address" },
+        "storeNotice": { "type": "string", "description": "Top promotional and privacy delivery notice" },
+        "instagramHandle": { "type": "string", "description": "Instagram social handle" },
+        "twitterHandle": { "type": "string", "description": "Twitter/X social handle" },
+        "currencySymbol": { "type": "string", "description": "Currency symbol, defaults to ₦" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["whatsappNumber"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Global collection of intimate wellness and pleasure products"
+    },
+    "/settings/{settingId}": {
+      "schema": "StoreSettings",
+      "description": "Storewide configuration document (default: 'general')"
+    }
+  }
+}

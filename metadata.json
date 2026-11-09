@@ -1,0 +1,6 @@
+{
+  "name": "Velvet Pleasure House",
+  "description": "More than pleasure products. A space to explore, understand, and embrace your intimate wellness. Nigeria's online intimate-wellness and pleasure-products brand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
